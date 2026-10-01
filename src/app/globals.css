@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #000000;
+  --card: #FFFFFF;
+  --border: #E5E7EB;
+  --text-primary: #000000;
+  --text-secondary: #4B5563;
+  --accent-blue: #2563EB;
+  --accent-purple: #7C3AED;
+  --accent-red: #DC2626;
+}
+
+body {
+  color: #111827;
+  background: #F9FAFB;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================================================= */
+/* Restrained Motion System (140-200ms transitions, compositor-friendly)     */
+/* ========================================================================= */
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdownEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-2px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes dialogEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-page-enter {
+  animation: pageEnter 180ms ease-out forwards;
+}
+
+.animate-dropdown-enter {
+  animation: dropdownEnter 140ms ease-out forwards;
+}
+
+.animate-dialog-enter {
+  animation: dialogEnter 180ms ease-out forwards;
+}
+
+/* Interactive Card Motion: subtle neutral border change and modest lift */
+.card-interactive {
+  transition: transform 160ms ease-out, border-color 160ms ease-out, box-shadow 160ms ease-out;
+}
+.card-interactive:hover {
+  transform: translateY(-1px);
+  border-color: #2563EB;
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    transform: none !important;
+  }
+  .card-interactive:hover {
+    transform: none !important;
+  }
+}
+
+/* Printable Digital Hall Pass styles - Ink-friendly white background & black modules */
+@media print {
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+  }
+  nav, aside, header, footer, .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}
